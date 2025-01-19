@@ -6,6 +6,8 @@ class Solution {
         int m=heightMap.length;
         int n=heightMap[0].length;
         boolean[][] vis =new boolean[m][n];
+
+        //Vising all the Boundary Element and viaing it as true
         for(int i=0;i<n;i++){
             pq.add(new int[]{0,i,heightMap[0][i]});
             vis[0][i]=true;
@@ -36,7 +38,11 @@ class Solution {
                 int nr =r+drow[k];
                 int nc =c +dcol[k];
                 if(nr>=0 && nc>=0 && nr<m && nc<n && !vis[nr][nc]){
+                    //Checking and adding the height of water can be strored
+                    // for water to be stored (height-heightMap[nr][nc]>0) if not we will add 0
                     water+=Math.max(val-heightMap[nr][nc],0);
+
+                    //Adding the updated height for the neighbour using Math.max(val,heightMap[nr][nc])
                     pq.add(new int[]{nr,nc,Math.max(val,heightMap[nr][nc])});
                     vis[nr][nc]=true;
                 }
